@@ -1,5 +1,6 @@
 package edu.usm.distributeddatabase.service;
 
+import edu.usm.distributeddatabase.entity.CustAddress;
 import edu.usm.distributeddatabase.entity.Customer;
 import edu.usm.distributeddatabase.repo.CustomerRepo;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -16,34 +18,45 @@ import java.util.Optional;
 public class CustomerService {
     private final CustomerRepo customerRepo;
 
-    public void saveCustomer(Customer customer) {
-        Optional<Customer> optionalCustomer = customerRepo.findByEmail(customer.getEmail());
-        if (optionalCustomer.isEmpty()) {
-            Customer cust = new Customer();
-            cust.setFirstName(customer.getFirstName());
-            cust.setLastName(customer.getLastName());
-            cust.setEmail(customer.getEmail());
-            cust.setMobileNo(customer.getMobileNo());
-            cust.setPassword(hashPassword(customer.getPassword()));
-            customerRepo.save(cust);
+    public Integer saveCustomer(Customer customer) {
+        Customer cust = getCustomerPresentByEmail(customer.getEmail());
+        if (Objects.isNull(cust)) {
+            Customer build = Customer.builder()
+                    .firstName(customer.getFirstName())
+                    .lastName(customer.getLastName())
+                    .email(customer.getEmail())
+                    .mobileNo(customer.getMobileNo())
+                    .password(hashPassword(customer.getPassword()))
+                    .build();
+            Customer savedCustomer = customerRepo.save(build);
             log.info("Customer registered successfully with email {}", customer.getEmail());
+            return savedCustomer.getCustId();
         } else {
             log.info("User already exists with email {}", customer.getEmail());
+            return cust.getCustId();
         }
     }
 
-    public void validateCustomer(String email, String password) {
-        Optional<Customer> optionalCustomer = customerRepo.findByEmail(email);
-        if (optionalCustomer.isPresent()) {
-            String hashedPassword = optionalCustomer.get().getPassword();
+    public boolean validateCustomer(String email, String password) {
+        Customer customer = getCustomerPresentByEmail(email);
+        if (!Objects.isNull(customer)) {
+            String hashedPassword = customer.getPassword();
             if (validatePassword(password, hashedPassword)) {
                 log.info("User is authenticated");
+                return true;
             } else {
                 log.info("user is not authenticated");
+                return false;
             }
         } else {
             log.info("user is not registered with email {}", email);
+            return false;
         }
+    }
+
+    public Customer getCustomerPresentByEmail(String email) {
+        Optional<Customer> optionalCustomer = customerRepo.findByEmail(email);
+        return optionalCustomer.orElse(null);
     }
 
 
@@ -53,6 +66,6 @@ public class CustomerService {
 
     private boolean validatePassword(String plainText, String hashedPassword) {
         return BCrypt.checkpw(plainText, hashedPassword);
-        
+
     }
 }

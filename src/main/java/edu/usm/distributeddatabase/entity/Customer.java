@@ -1,18 +1,20 @@
 package edu.usm.distributeddatabase.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.sql.rowset.serial.SerialArray;
+import java.io.Serializable;
 
 @Table
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
+@Builder
+public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "cust_id", nullable = false)
@@ -22,4 +24,11 @@ public class Customer {
     private String email;
     private Integer mobileNo;
     private String password;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shipping_addr_id")
+    private CustAddress shippingAddr;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "billing_addr_id")
+    private CustAddress billingAddr;
+
 }
