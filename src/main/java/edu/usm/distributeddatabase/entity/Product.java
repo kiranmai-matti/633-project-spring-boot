@@ -28,6 +28,4 @@ public class Product implements Serializable {
     private Double prdPrice;
     private Integer prdCode;
     private String prdImgUrl;
-
-
 }
