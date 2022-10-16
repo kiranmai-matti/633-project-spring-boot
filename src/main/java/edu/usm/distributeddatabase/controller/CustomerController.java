@@ -25,16 +25,13 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginCustomer(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<CustomerDTO> loginCustomer(@RequestBody LoginRequest loginRequest) {
         Customer customerByEmail = customerService.getCustomerPresentByEmail(loginRequest.getEmail());
-        if (Objects.isNull(customerByEmail)) {
-            return new ResponseEntity<>("Customer is not registered", HttpStatus.NOT_FOUND);
-        } else {
-            if (customerService.validateCustomer(loginRequest.getEmail(), loginRequest.getPassword()))
-                return new ResponseEntity<>("Customer logged in successfully", HttpStatus.OK);
-            else
-                return new ResponseEntity<>("Invalid Email/Password", HttpStatus.UNAUTHORIZED);
-        }
+        CustomerDTO customerDTO = buildCustomerDTO(customerByEmail);
+        if (customerService.validateCustomer(loginRequest.getEmail(), loginRequest.getPassword()))
+            return new ResponseEntity<>(customerDTO, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
     @PostMapping("/register")
@@ -66,6 +63,17 @@ public class CustomerController {
                 .state(custAddress.getState())
                 .zipcode(custAddress.getZipcode())
                 .country(custAddress.getCountry())
+                .build();
+    }
+
+    private CustomerDTO buildCustomerDTO(Customer customer) {
+        return CustomerDTO.builder()
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
+                .mobileNo(customer.getMobileNo())
+                .email(customer.getEmail())
+                .billingAddr(getAddress(customer.getBillingAddr()))
+                .shippingAddr(getAddress(customer.getShippingAddr()))
                 .build();
     }
 }

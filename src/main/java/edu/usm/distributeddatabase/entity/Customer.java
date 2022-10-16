@@ -1,6 +1,7 @@
 package edu.usm.distributeddatabase.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Customer implements Serializable {
     private String lastName;
     private String email;
     private Integer mobileNo;
+    @JsonIgnore
     private String password;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipping_addr_id")
