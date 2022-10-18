@@ -17,10 +17,6 @@ public class ProductService {
     private final CategoryRepo categoryRepo;
     private final ProductRepo productRepo;
 
-    public List<Product> getAllProducts() {
-        return productRepo.findAll();
-    }
-
     public List<Product> getAllProductsByCategory(Integer categoryId) {
         List<Product> productList = Collections.emptyList();
         Optional<Category> optionalCategory = categoryRepo.findById(categoryId);

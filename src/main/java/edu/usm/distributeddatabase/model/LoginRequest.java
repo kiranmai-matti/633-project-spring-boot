@@ -1,4 +1,4 @@
-package edu.usm.distributeddatabase.service;
+package edu.usm.distributeddatabase.model;
 
 
 import lombok.AllArgsConstructor;

@@ -2,6 +2,7 @@ package edu.usm.distributeddatabase.controller;
 
 import edu.usm.distributeddatabase.entity.Category;
 import edu.usm.distributeddatabase.entity.Product;
+import edu.usm.distributeddatabase.mapper.ModelMapper;
 import edu.usm.distributeddatabase.model.CategoryDTO;
 import edu.usm.distributeddatabase.model.ProductDTO;
 import edu.usm.distributeddatabase.service.CategoryService;
@@ -25,12 +26,14 @@ public class CategoryController {
     private CategoryService categoryService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping()
     public ResponseEntity<List<CategoryDTO>> getCategories() {
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
         categoryService.getAllCategories().forEach(category -> {
-            categoryDTOList.add(buildCategoryDTO(category));
+            categoryDTOList.add(modelMapper.buildCategoryDTO(category));
         });
         return new ResponseEntity<>(categoryDTOList, HttpStatus.OK);
     }
@@ -39,27 +42,10 @@ public class CategoryController {
     public ResponseEntity<List<ProductDTO>> getProductsByCategory(@PathVariable(value = "categoryId") Integer categoryId) {
         List<ProductDTO> productDTOList = new ArrayList<>();
         productService.getAllProductsByCategory(categoryId).forEach(product -> {
-            productDTOList.add(buildProductDTO(product));
+            productDTOList.add(modelMapper.buildProductDTO(product));
         });
         return ResponseEntity.ok(productDTOList);
     }
 
-    private CategoryDTO buildCategoryDTO(Category category) {
-        return CategoryDTO.builder()
-                .categoryId(category.getCategoryId())
-                .categoryName(category.getCategoryName())
-                .build();
-    }
 
-    private ProductDTO buildProductDTO(Product product) {
-        return ProductDTO.builder()
-                .categoryId(product.getCategory().getCategoryId())
-                .prdId(product.getPrdId())
-                .prdCode(product.getPrdCode())
-                .prdName(product.getPrdName())
-                .prdDesc(product.getPrdDesc())
-                .prdImgUrl(product.getPrdImgUrl())
-                .prdPrice(product.getPrdPrice())
-                .build();
-    }
 }
