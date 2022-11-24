@@ -1,7 +1,5 @@
 package edu.usm.distributeddatabase.controller;
 
-import edu.usm.distributeddatabase.entity.Category;
-import edu.usm.distributeddatabase.entity.Product;
 import edu.usm.distributeddatabase.mapper.ModelMapper;
 import edu.usm.distributeddatabase.model.CategoryDTO;
 import edu.usm.distributeddatabase.model.ProductDTO;
@@ -21,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/categories")
 @Slf4j
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;

@@ -5,7 +5,6 @@ import edu.usm.distributeddatabase.entity.Category;
 import edu.usm.distributeddatabase.entity.Product;
 import edu.usm.distributeddatabase.model.CategoryDTO;
 import edu.usm.distributeddatabase.model.ProductDTO;
-import edu.usm.distributeddatabase.service.CustomerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

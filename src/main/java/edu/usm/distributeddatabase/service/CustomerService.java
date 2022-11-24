@@ -1,6 +1,5 @@
 package edu.usm.distributeddatabase.service;
 
-import edu.usm.distributeddatabase.entity.CustAddress;
 import edu.usm.distributeddatabase.entity.Customer;
 import edu.usm.distributeddatabase.repo.CustomerRepo;
 import lombok.RequiredArgsConstructor;

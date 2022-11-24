@@ -4,7 +4,6 @@ package edu.usm.distributeddatabase.controller;
 import edu.usm.distributeddatabase.entity.Category;
 import edu.usm.distributeddatabase.entity.Product;
 import edu.usm.distributeddatabase.mapper.ModelMapper;
-import edu.usm.distributeddatabase.model.CategoryDTO;
 import edu.usm.distributeddatabase.service.CategoryService;
 import edu.usm.distributeddatabase.service.ProductService;
 import org.junit.jupiter.api.Assertions;

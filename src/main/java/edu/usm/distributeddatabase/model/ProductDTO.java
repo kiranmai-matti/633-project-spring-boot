@@ -1,7 +1,5 @@
 package edu.usm.distributeddatabase.model;
 
-import edu.usm.distributeddatabase.entity.Category;
-import edu.usm.distributeddatabase.entity.CustAddress;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

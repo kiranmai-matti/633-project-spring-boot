@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.sql.rowset.serial.SerialArray;
 import java.io.Serializable;
 
 @Table
