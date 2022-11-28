@@ -48,8 +48,8 @@ public class ModelMapper {
                 .lastName(customer.getLastName())
                 .mobileNo(customer.getMobileNo())
                 .email(customer.getEmail())
-                .billingAddr(getAddress(customer.getBillingAddr()))
-                .shippingAddr(getAddress(customer.getShippingAddr()))
+                .billingAddr(customer.getBillingAddr()==null?null:getAddress(customer.getBillingAddr()))
+                .shippingAddr(customer.getShippingAddr()==null?null:getAddress(customer.getShippingAddr()))
                 .build();
     }
 }

@@ -14,6 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,8 +23,7 @@ public class Customer implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    private Integer mobileNo;
-    @JsonIgnore
+    private Long mobileNo;
     private String password;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipping_addr_id")

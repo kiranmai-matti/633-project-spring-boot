@@ -15,7 +15,7 @@ public class CustomerDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private Integer mobileNo;
+    private Long mobileNo;
     private CustAddress billingAddr;
     private CustAddress shippingAddr;
 }

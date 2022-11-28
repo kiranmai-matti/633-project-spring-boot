@@ -59,12 +59,11 @@ public class CustomerService {
     }
 
 
-    private @NotNull String hashPassword(String plainText) {
-        return BCrypt.hashpw(plainText, BCrypt.gensalt());
+    private String hashPassword(String plainText) {
+        return BCrypt.hashpw(plainText, BCrypt.gensalt(6));
     }
 
     private boolean validatePassword(String plainText, String hashedPassword) {
         return BCrypt.checkpw(plainText, hashedPassword);
-
     }
 }
