@@ -2,6 +2,7 @@ package edu.usm.distributeddatabase.service;
 
 import edu.usm.distributeddatabase.entity.Category;
 import edu.usm.distributeddatabase.entity.Product;
+import edu.usm.distributeddatabase.exception.NotFoundException;
 import edu.usm.distributeddatabase.repo.CategoryRepo;
 import edu.usm.distributeddatabase.repo.ProductRepo;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,9 @@ public class ProductService {
         Optional<Category> optionalCategory = categoryRepo.findById(categoryId);
         if (optionalCategory.isPresent())
             productList = productRepo.findProductsByCategory(optionalCategory.get());
+        else{
+            throw new NotFoundException("No Products Found for the given category "+categoryId);
+        }
         return productList;
     }
 }

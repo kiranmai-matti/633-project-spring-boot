@@ -1,6 +1,7 @@
 package edu.usm.distributeddatabase.service;
 
 import edu.usm.distributeddatabase.entity.Customer;
+import edu.usm.distributeddatabase.exception.NotFoundException;
 import edu.usm.distributeddatabase.repo.CustomerRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -76,7 +77,7 @@ public class CustomerService {
      */
     public Customer getCustomerPresentByEmail(String email) {
         Optional<Customer> optionalCustomer = customerRepo.findByEmail(email);
-        return optionalCustomer.orElse(null);
+        return optionalCustomer.orElseThrow(() -> new NotFoundException("The customer info is not available, " + email));
     }
 
     /**
