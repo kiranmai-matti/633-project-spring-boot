@@ -17,6 +17,9 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
+/**
+ * Java Representation class for the Database table Category
+ */
 public class Category implements Serializable {
     @Id
     @Column(name = "category_id", nullable = false)

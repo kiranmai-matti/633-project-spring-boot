@@ -13,6 +13,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Java Representation class for the Database table CustAddress
+ */
 public class CustAddress implements Serializable {
     @Id
     @Column(name = "cust_address_id", nullable = false)

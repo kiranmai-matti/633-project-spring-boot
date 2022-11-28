@@ -17,6 +17,11 @@ public class ProductService {
     private final CategoryRepo categoryRepo;
     private final ProductRepo productRepo;
 
+    /**
+     * This Method os used to list all the associated products for the provided category ID
+     * @param categoryId Category Id
+     * @return List<Product>
+     */
     public List<Product> getAllProductsByCategory(Integer categoryId) {
         List<Product> productList = Collections.emptyList();
         Optional<Category> optionalCategory = categoryRepo.findById(categoryId);

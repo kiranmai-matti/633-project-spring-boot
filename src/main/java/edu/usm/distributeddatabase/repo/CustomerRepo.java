@@ -7,7 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
+/**
+ * Data Access Layer, for Manage Customers
+ */
 public interface CustomerRepo extends JpaRepository<Customer,Integer> {
+    /**
+     * This method is used to check whether the Customer Exists by Email or Not
+     * @param email Customer's Email Id
+     * @return Optional<Customer>
+     */
     Optional<Customer> findByEmail(String email);
-
 }

@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
+/**
+ * Data Transformed Class
+ */
 public class CategoryDTO {
     private Integer categoryId;
     private String categoryName;

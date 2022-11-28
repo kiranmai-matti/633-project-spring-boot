@@ -29,6 +29,10 @@ public class CategoryController {
     @Autowired
     private ModelMapper modelMapper;
 
+    /**
+     * This Method is used to get all the supported categories for the application
+     * @return List of CategoryDTO
+     */
     @GetMapping()
     public ResponseEntity<List<CategoryDTO>> getCategories() {
         List<CategoryDTO> categoryDTOList = new ArrayList<>();
@@ -38,6 +42,11 @@ public class CategoryController {
         return new ResponseEntity<>(categoryDTOList, HttpStatus.OK);
     }
 
+    /**
+     * This method is used to get the List of Transformed Product Object for a given category.
+     * @param categoryId Id of the Category
+     * @return List of ProductDTO
+     */
     @GetMapping("/{categoryId}/products")
     public ResponseEntity<List<ProductDTO>> getProductsByCategory(@PathVariable(value = "categoryId") Integer categoryId) {
         List<ProductDTO> productDTOList = new ArrayList<>();
@@ -46,6 +55,4 @@ public class CategoryController {
         });
         return ResponseEntity.ok(productDTOList);
     }
-
-
 }

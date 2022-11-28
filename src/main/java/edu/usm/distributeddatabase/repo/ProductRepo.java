@@ -8,8 +8,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
+/**
+ * Data Access Layer, for Manage Products
+ */
 public interface ProductRepo extends JpaRepository<Product, Integer> {
 
+    /**
+     * This method is used to view all the associated products for given category
+     * @param category Category
+     * @return
+     */
     List<Product> findProductsByCategory(Category category);
 
 }

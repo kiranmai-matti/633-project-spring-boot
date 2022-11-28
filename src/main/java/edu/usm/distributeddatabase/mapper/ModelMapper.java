@@ -12,6 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ModelMapper {
 
+    /**
+     * This Method is used to convert Entity Class to Transformed Data Object
+     * @param category Category Entity
+     * @return CategoryDTO
+     */
     public CategoryDTO buildCategoryDTO(Category category) {
         return CategoryDTO.builder()
                 .categoryId(category.getCategoryId())
@@ -19,6 +24,11 @@ public class ModelMapper {
                 .build();
     }
 
+    /**
+     * This Method is used to convert Entity Class to Transformed Data Object
+     * @param product Product Entity
+     * @return ProductDTO
+     */
     public ProductDTO buildProductDTO(Product product) {
         return ProductDTO.builder()
                 .categoryId(product.getCategory().getCategoryId())
@@ -31,6 +41,11 @@ public class ModelMapper {
                 .build();
     }
 
+    /**
+     * This Method is used to convert Entity Class to Transformed Data Object
+     * @param custAddress CustAddress Entity
+     * @return CustAddress
+     */
     public CustAddress getAddress(CustAddress custAddress) {
         return CustAddress.builder()
                 .addr1(custAddress.getAddr1())
@@ -42,6 +57,11 @@ public class ModelMapper {
                 .build();
     }
 
+    /**
+     * This Method is used to convert Entity Class to Transformed Data Object
+     * @param customer Customer Entity
+     * @return CustomerDTO
+     */
     public CustomerDTO buildCustomerDTO(Customer customer) {
         return CustomerDTO.builder()
                 .firstName(customer.getFirstName())

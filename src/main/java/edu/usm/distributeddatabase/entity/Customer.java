@@ -15,6 +15,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @ToString
+/**
+ * Java Representation class for the Database table Customer
+ */
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

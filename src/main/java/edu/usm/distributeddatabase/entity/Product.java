@@ -15,6 +15,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Setter
 @Getter
+/**
+ * Java Representation class for the Database table Product
+ */
 public class Product implements Serializable {
     @Id
     @Column(name = "prd_id", nullable = false)

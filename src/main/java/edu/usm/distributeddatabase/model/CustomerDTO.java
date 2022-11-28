@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
+/**
+ * Data Transformed Class
+ */
 public class CustomerDTO {
     private String firstName;
     private String lastName;

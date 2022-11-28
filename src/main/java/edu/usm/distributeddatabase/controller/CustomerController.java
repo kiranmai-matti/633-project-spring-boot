@@ -23,6 +23,11 @@ public class CustomerController {
     @Autowired
     private ModelMapper modelMapper;
 
+    /**
+     * This Method is used to validate Customer's Login process for the given email & password combination
+     * @param loginRequest holds email & password
+     * @return CustomerDTO
+     */
     @PostMapping("/login")
     public ResponseEntity<CustomerDTO> loginCustomer(@RequestBody LoginRequest loginRequest) {
         Customer customerByEmail = customerService.getCustomerPresentByEmail(loginRequest.getEmail());
@@ -33,6 +38,11 @@ public class CustomerController {
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
+    /**
+     * This Method is used to save the customer's details into the application's database
+     * @param customer Customer Information Object
+     * @return Integer
+     */
     @PostMapping("/register")
     public ResponseEntity<Integer> registerCustomer(@RequestBody Customer customer) {
         log.info("register Customer with email {}", customer.getEmail());
