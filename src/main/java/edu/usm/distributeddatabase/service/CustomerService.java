@@ -77,7 +77,7 @@ public class CustomerService {
      */
     public Customer getCustomerPresentByEmail(String email) {
         Optional<Customer> optionalCustomer = customerRepo.findByEmail(email);
-        return optionalCustomer.orElseThrow(() -> new NotFoundException("The customer info is not available, " + email));
+        return optionalCustomer.orElse(null);
     }
 
     /**
